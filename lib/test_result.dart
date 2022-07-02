@@ -2,6 +2,11 @@ import 'package:test_rail_dart/test_attachment.dart';
 import 'package:test_rail_dart/src/test_rail_http_client.dart';
 import 'package:test_rail_dart/test_rail.dart';
 import 'package:test_rail_dart/test_results.dart';
+import 'package:test_rail_dart/test_attachment.dart';
+import 'package:test_rail_dart/src/test_rail_http_client.dart';
+import 'package:test_rail_dart/test_rail.dart';
+import 'dart:io';
+import 'dart:convert';
 
 class TestResult {
   final int? assignedToId;
@@ -70,10 +75,14 @@ class TestResult {
   }
 
   Future<TestAttachment> addAttachment(String path) async {
-    final url = '/add_attachment_to_result/$id';
+    print("add_attachment_to_result $id");
+    stderr.writeln("add_attachment_to_result $id");
+    final url = 'add_attachment_to_result/$id';
     final response = await TestRail.instance.client
-        .request(url, RequestMethod.postMultipart, params: {'filePath': path});
-    return TestAttachment.fromJson(response!);
+        .request(url, RequestMethod.postMultipart, params: {'attachment': path},filePath:path );
+    stderr.writeln("add_attachment_to_response ${response}");
+
+    return TestAttachment.fromJson(response);
   }
 
   static Future<TestResults> getTestResults(

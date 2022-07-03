@@ -79,7 +79,7 @@ class TestResult {
         .request(url, RequestMethod.postMultipart, params: {'attachment': path},filePath:path );
     stderr.writeln("add_attachment_to_response ${response}");
 
-    return TestAttachment.fromJson(response);
+    return TestAttachment.fromJson(response!);
   }
 
   static Future<TestResults> getTestResults(

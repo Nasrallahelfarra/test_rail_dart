@@ -79,7 +79,13 @@ class TestRailHttpClient {
     }
 
     if (response.body.isNotEmpty) {
-      return jsonDecode(response.body);
+       try{
+        return jsonDecode(response.body);
+
+      }catch(e){
+        return null;
+
+      }
     }
     return null;
   }

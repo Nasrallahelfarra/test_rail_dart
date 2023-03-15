@@ -2,6 +2,7 @@ import 'package:test_rail_dart/test_result.dart';
 import 'package:test_rail_dart/src/test_rail_http_client.dart';
 import 'package:test_rail_dart/test_rail.dart';
 import 'package:test_rail_dart/test_runs.dart';
+import 'dart:developer';
 
 class TestRun {
   final int? assignedtoId;
@@ -117,6 +118,20 @@ class TestRun {
       updatedOn: updatedOn,
       url: json['url'],
     );
+  }
+  
+   Future<void> addMultiResultForCase(
+      {
+       required List<dynamic>listCase
+      }) async {
+    final response = await TestRail.instance.client.request(
+      '/add_results/$id',
+      RequestMethod.post,
+      params: {
+        'results': listCase,
+      },
+    );
+    log('result Response : ${response.toString()}');
   }
 
   Future<TestResult> addResultForCase(

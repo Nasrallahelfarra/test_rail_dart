@@ -120,13 +120,9 @@ class TestRun {
     );
   }
   
-   Future<void> addMultiResultForCase(
+    Future<void> addMultiResultForCase(
       {
        required List<dynamic>listCase
-      }) async {
-    final response = await TestRail.instance.client.request(
-      {
-       required List<Map<String, dynamic>>listCase
       }) async {
     final response = await TestRail.instance.client.request(
       '/add_results_for_cases/$id',
